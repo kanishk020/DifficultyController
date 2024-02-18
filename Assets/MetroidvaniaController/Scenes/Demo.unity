@@ -4218,7 +4218,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4567782686879236, guid: 061600cc71b08b947a704a7416146101, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.89
+      value: 4.2
       objectReference: {fileID: 0}
     - target: {fileID: 4567782686879236, guid: 061600cc71b08b947a704a7416146101, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6053,6 +6053,8 @@ MonoBehaviour:
   diffLimits: 0f00000019000000250000003c0000003c0000003c0000003c0000003c0000003c0000003c000000
   difficlutymean: 0
   TimerSeconds: 30
+  deathCount: 0
+  deathLimit: 5
 --- !u!1 &1997573415
 GameObject:
   m_ObjectHideFlags: 0

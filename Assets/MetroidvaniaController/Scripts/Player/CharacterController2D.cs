@@ -47,11 +47,16 @@ public class CharacterController2D : MonoBehaviour
 	public UnityEvent OnFallEvent;
 	public UnityEvent OnLandEvent;
 
+	
+
+	public static CharacterController2D instance;
+	
 	[System.Serializable]
 	public class BoolEvent : UnityEvent<bool> { }
 
 	private void Awake()
 	{
+		
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
 
@@ -61,9 +66,10 @@ public class CharacterController2D : MonoBehaviour
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
 	}
+    
 
 
-	private void FixedUpdate()
+    private void FixedUpdate()
 	{
 		bool wasGrounded = m_Grounded;
 		m_Grounded = false;
@@ -337,6 +343,7 @@ public class CharacterController2D : MonoBehaviour
 		animator.SetBool("IsDead", true);
 		canMove = false;
 		invincible = true;
+		DifficultyController.deathCount++;
 		GetComponent<Attack>().enabled = false;
 		yield return new WaitForSeconds(0.4f);
 		m_Rigidbody2D.velocity = new Vector2(0, m_Rigidbody2D.velocity.y);

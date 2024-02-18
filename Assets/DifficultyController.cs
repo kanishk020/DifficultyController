@@ -22,12 +22,17 @@ public class DifficultyController : MonoBehaviour
     public List<int> diffLimits;
     public float difficlutymean;
     public int TimerSeconds;
+
+    public static int deathCount;
+    public int DeathCount;
+    public int deathLimit;
     public static DifficultyController instance;
 
     float time;
 
     void Start()
     {
+        
         if(instance == null)
         {
             instance = this;
@@ -38,12 +43,14 @@ public class DifficultyController : MonoBehaviour
         }
 
 
+
         difficulty = PlayerPrefs.GetInt("Difficulty", 1);
 
     }
 
     private void Update()
     {
+        DeathCount = deathCount;
         difficlutymean = (damageGiven + damageTaken )/2;
 
        
@@ -78,16 +85,24 @@ public class DifficultyController : MonoBehaviour
     {
         index = difficulty - 1;
 
+        //deathCount = PlayerPrefs.GetInt("DeathCount");
+
         if(difficlutymean > diffLimits[index] && difficulty <10 )
         {
-            difficulty = difficulty + 1;
+            difficulty++;
             PlayerPrefs.SetInt("Difficulty", difficulty);
-
             index++;
         }
         else
         {
             difficulty = 10;
+        }
+
+        if(deathCount > deathLimit && difficulty > 1)
+        {
+            difficulty--;
+            PlayerPrefs.SetInt("Difficulty", difficulty);
+            deathCount = 0;
         }
     }
 
