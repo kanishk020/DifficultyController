@@ -69,9 +69,14 @@ public class Enemy : MonoBehaviour {
 		if (!isInvincible) 
 		{
 			float direction = damage / Mathf.Abs(damage);
+			
 			damage = Mathf.Abs(damage);
 			transform.GetComponent<Animator>().SetBool("Hit", true);
-			life -= damage;
+
+            float absDamage = damage / DifficultyController.instance.difficulty;
+			life -= absDamage;
+			DifficultyController.instance.damageGiven += absDamage;
+
 			rb.velocity = Vector2.zero;
 			rb.AddForce(new Vector2(direction * 500f, 100f));
 			StartCoroutine(HitTime());

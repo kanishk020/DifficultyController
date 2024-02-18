@@ -266,7 +266,10 @@ public class CharacterController2D : MonoBehaviour
 		if (!invincible)
 		{
 			animator.SetBool("Hit", true);
-			life -= damage;
+
+			float absDamage = damage * DifficultyController.instance.difficulty;
+			life -= absDamage;
+			DifficultyController.instance.damageTaken += absDamage;
 			Vector2 damageDir = Vector3.Normalize(transform.position - position) * 40f ;
 			m_Rigidbody2D.velocity = Vector2.zero;
 			m_Rigidbody2D.AddForce(damageDir * 10);
