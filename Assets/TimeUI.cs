@@ -47,12 +47,15 @@ public class TimeUI : MonoBehaviour
 
 
 
-        if (!isGameOver)
+        if (!isGameOver && currentLevelTime >0f)
         {
             currentLevelTime -= Time.deltaTime;
             
-            
-
         }
+        else if(!isGameOver && currentLevelTime < 0f)
+        {
+            isGameOver=true;
+        }
+ 
     }
 }
