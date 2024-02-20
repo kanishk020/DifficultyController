@@ -19,6 +19,7 @@ public class EntryGate : MonoBehaviour
             spriteRenderer.enabled = true;
             gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
             TimeUI.instance.isGameOver = false;
+            DifficultyController.instance.spawnTrigger = true;
         }
     }
     
