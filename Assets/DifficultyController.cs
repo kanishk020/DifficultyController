@@ -33,6 +33,8 @@ public class DifficultyController : MonoBehaviour
 
     public List<Transform> spawnPoints;
 
+    public List<Vector2> spawnPositions;
+
     int spawnIndex;
     float time;
 
@@ -75,7 +77,10 @@ public class DifficultyController : MonoBehaviour
         if (enemyContainer.transform.childCount == 0  && spawnTrigger == true)
         {
             spawnCount = difficulty * noOfSpawns;
+            
             StartCoroutine(SpawnEnemy());
+
+            spawnTrigger = false;
         }
 
         if (time >= TimerSeconds)
@@ -83,7 +88,7 @@ public class DifficultyController : MonoBehaviour
             DifficultySetter();
             damageGiven = 0;
             damageTaken = 0;
-
+            spawnTrigger = true;
             time = 0;
         }
 
@@ -91,39 +96,54 @@ public class DifficultyController : MonoBehaviour
         
     }
 
-    IEnumerator SpawnEnemy()
+
+    public void SpawnFilter()
     {
-        for(int i = 0;i< spawnCount; i++)
+
+        spawnPositions.Clear();
+        for (int i = 0; i < spawnPoints.Count; i++)
         {
             
-            SpawnpointDistanceX = Mathf.Abs( spawnPoints[spawnIndex].position.x - this.transform.position.x); //11
-            SpawnpointDistanceY = Mathf.Abs( spawnPoints[spawnIndex].position.y - this.transform.position.y); // 7
+            SpawnpointDistanceX = Mathf.Abs(spawnPoints[i].position.x - this.transform.position.x); //11
+            SpawnpointDistanceY = Mathf.Abs(spawnPoints[i].position.y - this.transform.position.y);
 
-            if (spawnIndex < spawnPoints.Count )
+            if(SpawnpointDistanceX > 11f && SpawnpointDistanceY > 7f)
             {
-                if( SpawnpointDistanceX > 11f || SpawnpointDistanceY > 7f)
-                {
-                    yield return new WaitForSeconds(1f);
-                    GameObject en = Instantiate(enemyPrefab, enemyContainer.transform);
-                    en.transform.position = spawnPoints[spawnIndex].position;
+                spawnPositions.Add(spawnPoints[i].position);
+            }
+        }
 
-                    spawnIndex++;
-                }
-                else
-                {
-                    spawnIndex++;
-                }
-                
-                
+
+    }
+
+
+
+
+    IEnumerator SpawnEnemy()
+    {
+        SpawnFilter();
+        
+        
+        for(int i = 0;i<spawnCount;i++)
+        {
+            if (spawnIndex < spawnPositions.Count)
+            {
+                yield return new WaitForSeconds(5f);
+                GameObject en = Instantiate(enemyPrefab, enemyContainer.transform);
+                en.transform.position = spawnPositions[index];
+                spawnIndex++;
+
+
             }
             else
             {
                 spawnIndex = 0;
             }
             
-
-
         }
+
+        
+        
     }
    
     public void DifficultySetter()
@@ -138,10 +158,7 @@ public class DifficultyController : MonoBehaviour
             PlayerPrefs.SetInt("Difficulty", difficulty);
             index++;
         }
-        else
-        {
-            difficulty = 10;
-        }
+        
 
         if(deathCount > deathLimit && difficulty > 1)
         {

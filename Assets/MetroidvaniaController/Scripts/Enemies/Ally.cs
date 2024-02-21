@@ -134,8 +134,14 @@ public class Ally : MonoBehaviour
 			Flip();
 		}
 	}
-
-	void Flip()
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Obstacle")
+		{
+			randomDecision = 0.5f;
+		}
+    }
+    void Flip()
 	{
 		// Switch the way the player is labelled as facing.
 		facingRight = !facingRight;

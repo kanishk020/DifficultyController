@@ -5,11 +5,12 @@ using UnityEngine;
 public class EntryGate : MonoBehaviour
 {
     SpriteRenderer spriteRenderer;
-
+    AudioSource audioSource;
     private void Start()
     {
          spriteRenderer= GetComponent<SpriteRenderer>();
         spriteRenderer.enabled= false;
+        audioSource= GetComponent<AudioSource>();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -20,6 +21,8 @@ public class EntryGate : MonoBehaviour
             gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
             TimeUI.instance.isGameOver = false;
             DifficultyController.instance.spawnTrigger = true;
+            audioSource.Play();
+
         }
     }
     
