@@ -360,4 +360,6 @@ public class CharacterController2D : MonoBehaviour
 		Destroy(this.gameObject);
 		//SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
 	}
+
+	
 }
