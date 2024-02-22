@@ -10,7 +10,10 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private bool m_AirControl = false;							// Whether or not a player can steer while jumping;
 	[SerializeField] private LayerMask m_WhatIsGround;							// A mask determining what is ground to the character
 	[SerializeField] private Transform m_GroundCheck;							// A position marking where to check if the player is grounded.
-	[SerializeField] private Transform m_WallCheck;								//Posicion que controla si el personaje toca una pared
+	[SerializeField] private Transform m_WallCheck;
+	
+	
+	//Posicion que controla si el personaje toca una pared
 
 	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
 	private bool m_Grounded;            // Whether or not the player is grounded.
@@ -47,6 +50,8 @@ public class CharacterController2D : MonoBehaviour
 	public UnityEvent OnFallEvent;
 	public UnityEvent OnLandEvent;
 
+
+	public GameObject playerSpawn;
 	
 
 	public static CharacterController2D instance;
@@ -348,6 +353,7 @@ public class CharacterController2D : MonoBehaviour
 		yield return new WaitForSeconds(0.4f);
 		m_Rigidbody2D.velocity = new Vector2(0, m_Rigidbody2D.velocity.y);
 		yield return new WaitForSeconds(1.1f);
-		SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+		GameManager.instance.isDead = true;
+		//SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
 	}
 }
