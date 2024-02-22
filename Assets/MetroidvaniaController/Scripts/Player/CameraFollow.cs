@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
 	public float FollowSpeed = 2f;
-	public Transform Target;
+	//public Transform Target;
 
 	// Transform of the camera to shake. Grabs the gameObject's transform
 	// if null.
@@ -20,8 +20,10 @@ public class CameraFollow : MonoBehaviour
 
 	Vector3 originalPos;
 
+	public static CameraFollow instance;
 	void Awake()
 	{
+		instance = this;
 		Cursor.visible = false;
 		if (camTransform == null)
 		{
@@ -36,16 +38,21 @@ public class CameraFollow : MonoBehaviour
 
 	private void Update()
 	{
-		Vector3 newPosition = Target.position;
-		newPosition.z = -10;
-		transform.position = Vector3.Slerp(transform.position, newPosition, FollowSpeed * Time.deltaTime);
+		GameObject player = GameObject.FindGameObjectWithTag("Player");
 
-		if (shakeDuration > 0)
-		{
-			camTransform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
+		if(player != null) {
+            Vector3 newPosition = player.transform.position;
+            newPosition.z = -10;
+            transform.position = Vector3.Slerp(transform.position, newPosition, FollowSpeed * Time.deltaTime);
 
-			shakeDuration -= Time.deltaTime * decreaseFactor;
-		}
+            if (shakeDuration > 0)
+            {
+                camTransform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
+
+                shakeDuration -= Time.deltaTime * decreaseFactor;
+            }
+        }
+        
 	}
 
 	public void ShakeCamera()

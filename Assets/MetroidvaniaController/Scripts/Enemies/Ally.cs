@@ -45,7 +45,7 @@ public class Ally : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate()
 	{
-
+		enemy = GameObject.FindGameObjectWithTag("Player");
 		if (life <= 0)
 		{
 			StartCoroutine(DestroyEnemy());
@@ -117,10 +117,10 @@ public class Ally : MonoBehaviour
 					StartCoroutine(Dash());
 			}
 		}
-		else 
-		{
-			enemy = GameObject.Find("DrawCharacter");
-		}
+		
+		
+			
+		
 
 		if (transform.localScale.x * m_Rigidbody2D.velocity.x > 0 && !m_FacingRight && life > 0)
 		{
@@ -160,7 +160,10 @@ public class Ally : MonoBehaviour
 			damage = Mathf.Abs(damage);
 			anim.SetBool("Hit", true);
 			life -= damage;
-			transform.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            float absDamage = damage / DifficultyController.instance.difficulty;
+            life -= absDamage;
+            DifficultyController.instance.damageGiven += absDamage;
+            transform.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
 			transform.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(direction * 300f, 100f)); 
 			StartCoroutine(HitTime());
 		}
@@ -172,15 +175,15 @@ public class Ally : MonoBehaviour
 		Collider2D[] collidersEnemies = Physics2D.OverlapCircleAll(attackCheck.position, 0.9f);
 		for (int i = 0; i < collidersEnemies.Length; i++)
 		{
-			if (collidersEnemies[i].gameObject.tag == "Enemy" && collidersEnemies[i].gameObject != gameObject )
-			{
-				if (transform.localScale.x < 1)
-				{
-					dmgValue = -dmgValue;
-				}
+			//if (collidersEnemies[i].gameObject.tag == "Enemy" && collidersEnemies[i].gameObject != gameObject )
+			//{
+				//if (transform.localScale.x < 1)
+				//{
+				//	dmgValue = -dmgValue;
+				//}
 				//collidersEnemies[i].gameObject.SendMessage("ApplyDamage", dmgValue);
-			}
-			else if (collidersEnemies[i].gameObject.tag == "Player")
+			//}
+			 if (collidersEnemies[i].gameObject.tag == "Player")
 			{
 				collidersEnemies[i].gameObject.GetComponent<CharacterController2D>().ApplyDamage(2f, transform.position);
 			}

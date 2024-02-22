@@ -9,7 +9,7 @@ public class TimeUI : MonoBehaviour
 {
    public TextMeshProUGUI text;
 
-    public bool isGameOver;
+    public bool timerstart;
 
     public float currentLevelTime;
 
@@ -29,7 +29,7 @@ public class TimeUI : MonoBehaviour
 
 
         
-        isGameOver = true;
+        timerstart = false;
         text = text.GetComponent<TextMeshProUGUI>();
 
        
@@ -47,14 +47,15 @@ public class TimeUI : MonoBehaviour
 
 
 
-        if (!isGameOver && currentLevelTime >0f)
+        if (timerstart && currentLevelTime >0f)
         {
             currentLevelTime -= Time.deltaTime;
             
         }
-        else if(!isGameOver && currentLevelTime < 0f)
+        else if(timerstart && currentLevelTime < 0f)
         {
-            isGameOver=true;
+            timerstart = false;
+            // retry screen
         }
  
     }

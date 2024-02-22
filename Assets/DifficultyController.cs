@@ -22,7 +22,7 @@ public class DifficultyController : MonoBehaviour
     public float damageGiven;
     public float damageTaken;
     
-    public List<int> diffLimits;
+    public List<float> diffLimits;
     public float difficlutymean;
     public int TimerSeconds;
 
@@ -44,6 +44,10 @@ public class DifficultyController : MonoBehaviour
 
     public bool spawnTrigger;
 
+    public Camera gameCam;
+
+    
+
     void Start()
     {
         spawnTrigger = false;
@@ -60,7 +64,7 @@ public class DifficultyController : MonoBehaviour
 
         difficulty = PlayerPrefs.GetInt("Difficulty", 1);
 
-
+        difficlutymean = 0.1f;
 
     }
 
@@ -68,7 +72,11 @@ public class DifficultyController : MonoBehaviour
     {
         
         DeathCount = deathCount;
-        difficlutymean = (damageGiven + damageTaken )/2;
+        if(damageGiven > 0 && damageTaken > 0)
+        {
+            difficlutymean = damageGiven / damageTaken;
+        }
+        
 
        
         time += Time.deltaTime;
@@ -104,8 +112,8 @@ public class DifficultyController : MonoBehaviour
         for (int i = 0; i < spawnPoints.Count; i++)
         {
             
-            SpawnpointDistanceX = Mathf.Abs(spawnPoints[i].position.x - this.transform.position.x); //11
-            SpawnpointDistanceY = Mathf.Abs(spawnPoints[i].position.y - this.transform.position.y);
+            SpawnpointDistanceX = Mathf.Abs(spawnPoints[i].position.x - gameCam.transform.position.x); //11
+            SpawnpointDistanceY = Mathf.Abs(spawnPoints[i].position.y - gameCam.transform.position.y);
 
             if(SpawnpointDistanceX > 11f && SpawnpointDistanceY > 7f)
             {
@@ -130,7 +138,7 @@ public class DifficultyController : MonoBehaviour
             {
                 yield return new WaitForSeconds(5f);
                 GameObject en = Instantiate(enemyPrefab, enemyContainer.transform);
-                en.transform.position = spawnPositions[index];
+                en.transform.position = spawnPositions[spawnIndex];
                 spawnIndex++;
 
 
@@ -156,9 +164,15 @@ public class DifficultyController : MonoBehaviour
         {
             difficulty++;
             PlayerPrefs.SetInt("Difficulty", difficulty);
-            index++;
+            
         }
-        
+        if(difficlutymean < diffLimits[index] && difficulty > 1)
+        {
+            difficulty--;
+            PlayerPrefs.SetInt("Difficulty", difficulty);
+            
+        }
+
 
         if(deathCount > deathLimit && difficulty > 1)
         {

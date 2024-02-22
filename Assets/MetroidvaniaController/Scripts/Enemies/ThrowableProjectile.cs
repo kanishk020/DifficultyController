@@ -24,7 +24,7 @@ public class ThrowableProjectile : MonoBehaviour
 			Destroy(gameObject);
 		}
 		
-		else if (collision.gameObject.tag != "Enemy" && collision.gameObject.tag != "Player")
+		else if ( collision.gameObject.tag != "Player")
 		{
 			Destroy(gameObject);
 		}

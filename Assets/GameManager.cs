@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public GameObject character;
     public bool isDead;
 
+    public AudioSource bgMusic;
+
 
     public GameObject escPanel;
 
@@ -23,7 +25,7 @@ public class GameManager : MonoBehaviour
     
     void Update()
     {
-        if(isDead && TimeUI.instance.isGameOver == false)
+        if(isDead && TimeUI.instance.timerstart == true)
 
         {
             Instantiate(character,playerSpawn.transform.position,Quaternion.identity,this.transform);
@@ -31,10 +33,7 @@ public class GameManager : MonoBehaviour
 
             isDead = false;
         }
-        else if( isDead && TimeUI.instance.isGameOver == true)
-        {
-            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
-        }
+        
         
         if(Input.GetKeyUp(KeyCode.Escape))
         {

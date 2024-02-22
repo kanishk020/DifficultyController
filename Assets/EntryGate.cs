@@ -10,7 +10,7 @@ public class EntryGate : MonoBehaviour
     {
          spriteRenderer= GetComponent<SpriteRenderer>();
         spriteRenderer.enabled= false;
-        audioSource= GetComponent<AudioSource>();
+        audioSource = GameManager.instance.bgMusic;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -19,9 +19,14 @@ public class EntryGate : MonoBehaviour
         {
             spriteRenderer.enabled = true;
             gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
-            TimeUI.instance.isGameOver = false;
+            TimeUI.instance.timerstart = true;
             DifficultyController.instance.spawnTrigger = true;
-            audioSource.Play();
+
+            if(audioSource!= null)
+            {
+                audioSource.Play();
+            }
+            
 
         }
     }
