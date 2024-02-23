@@ -82,7 +82,7 @@ public class DifficultyController : MonoBehaviour
         time += Time.deltaTime;
 
 
-        if (enemyContainer.transform.childCount == 0  && spawnTrigger == true)
+        if (enemyContainer.transform.childCount == 0  && spawnTrigger == true && TimeUI.instance.timerstart == true )
         {
             spawnCount = difficulty * noOfSpawns;
             
