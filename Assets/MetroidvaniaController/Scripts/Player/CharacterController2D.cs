@@ -54,7 +54,7 @@ public class CharacterController2D : MonoBehaviour
 	public GameObject playerSpawn;
 	
 
-	public static CharacterController2D instance;
+	
 	
 	[System.Serializable]
 	public class BoolEvent : UnityEvent<bool> { }
@@ -70,6 +70,9 @@ public class CharacterController2D : MonoBehaviour
 
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
+
+		
+
 	}
     
 

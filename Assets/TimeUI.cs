@@ -30,7 +30,8 @@ public class TimeUI : MonoBehaviour
 
         
         timerstart = false;
-        text = text.GetComponent<TextMeshProUGUI>();
+        
+        
 
        
 
@@ -43,7 +44,11 @@ public class TimeUI : MonoBehaviour
         
         int minutes = Mathf.FloorToInt((currentLevelTime % 3600f) / 60f);
         int seconds = Mathf.FloorToInt(currentLevelTime % 60f);
-        text.text = $" ={minutes:D2}:{seconds:D2}";
+
+        
+            text.text = $" ={minutes:D2}:{seconds:D2}";
+       
+        
 
 
 
