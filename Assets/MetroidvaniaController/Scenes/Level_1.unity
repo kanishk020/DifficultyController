@@ -17436,6 +17436,26 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 519420028}
+    - target: {fileID: 7064245801557613854, guid: 079fc40e7fdd12441bc7a2d0ef62718e, type: 3}
+      propertyPath: m_Size.x
+      value: 0.6246033
+      objectReference: {fileID: 0}
+    - target: {fileID: 7064245801557613854, guid: 079fc40e7fdd12441bc7a2d0ef62718e, type: 3}
+      propertyPath: m_Size.y
+      value: 1.4249115
+      objectReference: {fileID: 0}
+    - target: {fileID: 7064245801557613854, guid: 079fc40e7fdd12441bc7a2d0ef62718e, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.18856812
+      objectReference: {fileID: 0}
+    - target: {fileID: 7064245801557613854, guid: 079fc40e7fdd12441bc7a2d0ef62718e, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.042455673
+      objectReference: {fileID: 0}
+    - target: {fileID: 8249979775407761487, guid: 079fc40e7fdd12441bc7a2d0ef62718e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1399116968, guid: 854b702d4d15c438d97ea75b5a395825, type: 3}
     - target: {fileID: 8737934768066462374, guid: 079fc40e7fdd12441bc7a2d0ef62718e, type: 3}
       propertyPath: m_Name
       value: DrawCharacter
