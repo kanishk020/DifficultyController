@@ -45,6 +45,10 @@ public class Ally : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate()
 	{
+		if(this.gameObject.transform.position.y < 0)
+		{
+			Destroy(gameObject);
+		}
 		enemy = GameObject.FindGameObjectWithTag("Player");
 		if (life <= 0)
 		{
