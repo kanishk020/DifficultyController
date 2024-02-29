@@ -21332,6 +21332,14 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 519420028}
+    - target: {fileID: 4226661218797860722, guid: 079fc40e7fdd12441bc7a2d0ef62718e, type: 3}
+      propertyPath: nextThrowTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4226661218797860722, guid: 079fc40e7fdd12441bc7a2d0ef62718e, type: 3}
+      propertyPath: throwCooldown
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 5941403625651576493, guid: 079fc40e7fdd12441bc7a2d0ef62718e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 116.95
