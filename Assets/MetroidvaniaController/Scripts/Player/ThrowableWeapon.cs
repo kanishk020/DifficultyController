@@ -7,6 +7,7 @@ public class ThrowableWeapon : MonoBehaviour
 	public Vector2 direction;
 	public bool hasHit = false;
 	public float speed = 10f;
+	public float spin;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,8 @@ public class ThrowableWeapon : MonoBehaviour
     {
 		if ( !hasHit)
 		GetComponent<Rigidbody2D>().velocity = direction * speed;
+
+		this.transform.Rotate(new Vector3(0,0,spin) * Time.deltaTime);
 	}
 
 	void OnCollisionEnter2D(Collision2D collision)
