@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +6,8 @@ public class CameraFollow : MonoBehaviour
 {
 	public float FollowSpeed = 2f;
 	//public Transform Target;
+        
+        //public float camUp;
 
 	// Transform of the camera to shake. Grabs the gameObject's transform
 	// if null.
@@ -43,6 +45,7 @@ public class CameraFollow : MonoBehaviour
 		if(player != null) {
             Vector3 newPosition = player.transform.position;
             newPosition.z = -10;
+            //newPosition.y += camUp; 
             transform.position = Vector3.Slerp(transform.position, newPosition, FollowSpeed * Time.deltaTime);
 
             if (shakeDuration > 0)
