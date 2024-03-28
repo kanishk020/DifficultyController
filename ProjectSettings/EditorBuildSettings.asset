@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MetroidvaniaController/Scenes/Level_1.unity
     guid: f1eb00f761ca64ff388fc13eec303426
+  - enabled: 1
+    path: Assets/MetroidvaniaController/Scenes/Level_2.unity
+    guid: 2a3c131c012d84d9d849fd9e2b40e805
   m_configObjects: {}

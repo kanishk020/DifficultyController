@@ -11,6 +11,8 @@ public class TimeUI : MonoBehaviour
 
     public float currentLevelTime;
 
+    public GameObject ResultCanvas;
+
     
 
     public static TimeUI instance;
@@ -29,11 +31,7 @@ public class TimeUI : MonoBehaviour
         
         timerstart = false;
         
-        
-
-       
-
-
+        ResultCanvas.SetActive( false);
     }
 
     
@@ -58,7 +56,7 @@ public class TimeUI : MonoBehaviour
         else if(timerstart && currentLevelTime < 0f)
         {
             timerstart = false;
-            // retry screen
+            ResultCanvas.SetActive(true);
         }
  
     }
